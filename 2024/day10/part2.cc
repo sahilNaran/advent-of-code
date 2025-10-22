@@ -17,10 +17,6 @@ pair<int, int> operator+(const pair<int, int> a, const pair<int, int> b) {
 int search(vector<string> &grid, pair<int, int> me, pair<int, int> direction,
            int current) {
 
-  if (current == 9) {
-    return 1;
-  }
-
   pair<int, int> newPos = me + direction;
   int H = grid.size();
   int W = grid[0].size();
@@ -35,6 +31,10 @@ int search(vector<string> &grid, pair<int, int> me, pair<int, int> direction,
     return 0;
   }
 
+  if (nextLevel == 9) {
+    return 1;
+  }
+
   return transform_reduce(directions.begin(), directions.end(), 0, plus<>(),
                           [&grid, &newPos, &nextLevel](const auto &direction) {
                             return search(grid, newPos, direction, nextLevel);
@@ -42,7 +42,7 @@ int search(vector<string> &grid, pair<int, int> me, pair<int, int> direction,
 }
 
 int main() {
-  ifstream file("sample.txt");
+  ifstream file("input.txt");
 
   vector<string> grid;
   string line;
