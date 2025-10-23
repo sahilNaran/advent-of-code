@@ -6,19 +6,18 @@
 
 using namespace std;
 
-int numDigits(unsigned long long n) {
+int numDigits(int n) {
   if (n > 0) {
     return 1 + numDigits(n / 10);
   }
   return 0;
 }
 
-pair<unsigned long long, unsigned long long> splitNumber(unsigned long long n,
-                                                         int numDig) {
+pair<int, int> splitNumber(int n, int numDig) {
   int mid = numDig / 2;
   string num = to_string(n);
-  unsigned long long left = 0;
-  unsigned long long right = 0;
+  int left = 0;
+  int right = 0;
   for (size_t i = 0; i < num.size(); i++) {
     if (i < mid) {
       left = 10 * left + (num[i] - '0');
@@ -30,13 +29,13 @@ pair<unsigned long long, unsigned long long> splitNumber(unsigned long long n,
 }
 
 int main() {
-  ifstream file("input.txt");
+  ifstream file("sample.txt");
 
   string content((istreambuf_iterator<char>(file)),
                  istreambuf_iterator<char>());
   file.close();
 
-  vector<unsigned long long> base;
+  vector<int> base;
   for (size_t i = 0; i < content.size(); i++) {
     int x = 0;
     while (isdigit(content[i])) {
@@ -46,9 +45,9 @@ int main() {
     base.push_back(x);
   }
 
-  int repeat = 25;
+  int repeat = 2;
   while (repeat--) {
-    vector<unsigned long long> temp;
+    vector<int> temp;
     for (const auto &item : base) {
       if (item == 0) {
         temp.push_back(1);
@@ -63,14 +62,12 @@ int main() {
       }
       temp.push_back(item * 2024);
     }
-    // for (auto j : temp) {
-    //   cout << j << " ";
-    // }
-    // cout << endl;
     base = temp;
   }
 
-  cout << base.size();
+  for (auto item : base) {
+    cout << item << " ";
+  }
 
   return 0;
 }
