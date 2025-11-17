@@ -27,4 +27,4 @@ int main() {
   cout << quadrant[0][0] * quadrant[0][1] * quadrant[1][0] * quadrant[1][1];
   file.close();
   return 0;
-}
+:
