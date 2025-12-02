@@ -1,0 +1,30 @@
+line = ""
+with open("input.txt") as file:
+    line = file.read().strip()
+
+
+def getDir(c):
+    if c == "^":
+        return (0, -1)
+    elif c == ">":
+        return (1, 0)
+    elif c == "v":
+        return (0, 1)
+    return (-1, 0)
+
+
+me = (0, 0)
+robo = (0, 0)
+houses = {(0, 0)}
+turn = 0
+for c in line:
+    dir = getDir(c)
+    if turn % 2 == 0:
+        me = (me[0] + dir[0], me[1] + dir[1])
+        houses.add(me)
+    else:
+        robo = (robo[0] + dir[0], robo[1] + dir[1])
+        houses.add(robo)
+    turn += 1
+
+print(len(houses))
